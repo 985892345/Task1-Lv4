@@ -9,7 +9,7 @@
 
 > add(int p, String s)------>指定位置加元素
 
-> change(int p, String s)--->删除多位或一位元素
+> change(int p, String s)--->修改某位元素
 
 > remove(int p)------------>删除一位元素，但main方法中写了for循环，支持删除多位元素
 
