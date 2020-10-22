@@ -4,7 +4,7 @@ import java.util.*;
  *cqupt
  *2020.10.20
  *2767465918@qq.com
- *花了一天写完，再写个注释，留个纪念，现在你看到的是我优化了几次后的版本
+ *花了一天写完，再写个注释，留个纪念，现在你看到的是我优化了n次后的版本
  *由于用object太麻烦，功能太少，用string来写他不香吗？
  *记录我最多的报错："java.lang.ArrayIndexOutOfBoundsException: "每回都是数组越界问题
  *突然发现原来idea还能改进代码！把添加数组的for循环全部改了
@@ -146,6 +146,7 @@ public class Lv4 {
 		}
 	}
 
+	//打印
 	public static void print(int b){
 		if(b == 1){
 			System.out.println("本程序有以下功能：" + "\n" + 
@@ -159,7 +160,7 @@ public class Lv4 {
 							   "请输入想要实现的功能：");
 		}else if(b == 2){//改了元素后的打印新数组
 			System.out.println("新数组为：");
-			for(Object a: MutableArrayList.arr){
+			for(Object a: list.arr){
 				System.out.print(a + " ");
 			}
 		}

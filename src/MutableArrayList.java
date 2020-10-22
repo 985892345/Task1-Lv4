@@ -1,16 +1,16 @@
 public class MutableArrayList{
-	public static Object[] arr = new Object[0];
-	private Object[] arr1;
+	public String[] arr = new String[0];
+	private String[] arr1;
 
 	//增加新的元素
 	public void add(String add){
-		Object[] arr2 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
-		arr1 = new Object[arr.length + arr2.length];//用一个新的数组来搭桥
+		String[] arr2 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
+		arr1 = new String[arr.length + arr2.length];//用一个新的数组来搭桥
 		//将arr的全部数组写进arr1
 		System.arraycopy(arr, 0, arr1, 0, arr.length);
 		//将加进来的新元素填充到arr1的后面
 		System.arraycopy(arr2, 0, arr1, arr.length, arr2.length);
-		arr = new Object[arr1.length];//将arr数组初始化，增加长度
+		arr = new String[arr1.length];//将arr数组初始化，增加长度
 		//将arr1全部写进arr
 		System.arraycopy(arr1, 0, arr, 0, arr1.length);
 	}
@@ -27,11 +27,11 @@ public class MutableArrayList{
 
 	//指定位加元素
 	public void add(int position, String element){
-		arr1 = new Object[arr.length + 1];
+		arr1 = new String[arr.length + 1];
 		arr1[position - 1] = element;
 		System.arraycopy(arr, 0, arr1, 0, position - 1);
 		System.arraycopy(arr, position - 1, arr1, position, arr.length - position + 1);
-		arr = new Object[arr1.length];
+		arr = new String[arr1.length];
 		System.arraycopy(arr1, 0, arr, 0, arr1.length);
 	}
 	
@@ -41,12 +41,12 @@ public class MutableArrayList{
 
 	//删除1位元素，但前面用了个for循环，就是删除多位元素了
 	public void remove(int position){
-		arr1 = new Object[arr.length - 1];
+		arr1 = new String[arr.length - 1];
 		//将arr中position之前的元素写进arr1
 		System.arraycopy(arr, 0, arr1, 0, position - 1);
 		//将arr中position之后的元素写进arr1，此时刚好可以省去position位置的元素
 		System.arraycopy(arr, position, arr1, position - 1, arr.length - position);
-		arr = new Object[arr1.length];//将arr数组初始化，增加长度
+		arr = new String[arr1.length];//将arr数组初始化，增加长度
 		System.arraycopy(arr1, 0, arr, 0, arr1.length);//将arr1全部写进arr
 	}
 
