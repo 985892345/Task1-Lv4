@@ -11,7 +11,7 @@ import java.util.*;
  *
  */
 
-public class Le4{
+public class Lv4 {
 	static MutableArrayList list = new MutableArrayList();
 	public static void main(String[] args){
 		start();
@@ -100,14 +100,14 @@ public class Le4{
 			int length = list.size();
 			String[] in = input().split(" ");
 			Arrays.sort(in);//防止用户先删后面几位
-			for(int i = 0; i < in.length; i++){
-				if(0 < Integer.parseInt(in[i]) && Integer.parseInt(in[i]) <= length){
-					list.remove(Integer.parseInt(in[i]) - j);//运行了一次，则会生成一个新的数组，则后面的位置就会前移
+			for (String value : in) {
+				if (0 < Integer.parseInt(value) && Integer.parseInt(value) <= length) {
+					list.remove(Integer.parseInt(value) - j);//运行了一次，则会生成一个新的数组，则后面的位置就会前移
 					j++;
-				}else{
-					System.out.println(Integer.parseInt(in[i]) > length ? 
-					                  ("没有第" + in[i] + "位元素，最多只有" + list.size() + "位元素"):
-						              ("输入" + in[i] + "位元素错误，位数是从1开始"));
+				} else {
+					System.out.println(Integer.parseInt(value) > length ?
+							("没有第" + value + "位元素，最多只有" + list.size() + "位元素") :
+							("输入" + value + "位元素错误，位数是从1开始"));
 				}
 			}
 			print(2);
@@ -142,7 +142,7 @@ public class Le4{
 			judge(input());
 		}else{
 			System.out.println("程序结束，欢迎使用！");
-			//System.exit(0);
+			System.exit(0);
 		}
 	}
 
