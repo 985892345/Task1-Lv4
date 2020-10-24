@@ -64,11 +64,8 @@ public class MutableArrayList{
 			System.out.println("不存在" + element + "这个元素");
 		}else{
 			//System.out.println("b="+b);
-			int[] c = new int[b];     //用c[]来去掉a[]后面多的空元素
-			//System.out.println("c的位数为"+c[i]);
-		    System.arraycopy(a, 0, c, 0, b);
 			for(int i = 0; i < b; i++){
-				remove(c[i] - i);//妈的，此处想了好久,为什么要减个i？
+				remove(a[i] - i);//妈的，此处想了好久,为什么要减个i？
 			}                          //因为我是分开删掉的每个元素的位置，但，删了一个元素后，后面的元素都会向前移一格，所以必须减i
 		}
 	}
