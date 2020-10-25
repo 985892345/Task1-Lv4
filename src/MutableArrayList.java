@@ -1,23 +1,25 @@
+
+import java.util.*;
 public class MutableArrayList{
-	public String[] arr = new String[0];
-	private String[] arr1;
+	public String[] arr = {};
+	private static int length = 0;
 
 	//增加新的元素
 	public void add(String add){
-		String[] arr2 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
-		arr1 = new String[arr.length + arr2.length];//用一个新的数组来搭桥
-		//将arr的全部数组写进arr1
-		System.arraycopy(arr, 0, arr1, 0, arr.length);
-		//将加进来的新元素填充到arr1的后面
-		System.arraycopy(arr2, 0, arr1, arr.length, arr2.length);
-		arr = new String[arr1.length];//将arr数组初始化，增加长度
-		//将arr1全部写进arr
-		System.arraycopy(arr1, 0, arr, 0, arr1.length);
+		String[] arr2 = arr;
+		String[] arr1 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
+		if(arr1.length + arr.length > length){
+			arr = new String[length + 2 * arr1.length];//初始化数组，并缓存多的2倍新加进来数组的长度
+			System.arraycopy(arr2, 0, arr, 0, length);
+			length += arr1.length;
+		}
+		//将arr1的全部数组写进arr后面
+		System.arraycopy(arr1, 0, arr, length - arr1.length, arr1.length);
 	}
 
 	//读取数组长短
 	public int size(){
-		return arr.length;
+		return length;
 	}
 
 	//读取某位元素
@@ -27,12 +29,8 @@ public class MutableArrayList{
 
 	//指定位加元素
 	public void add(int position, String element){
-		arr1 = new String[arr.length + 1];
-		arr1[position - 1] = element;
-		System.arraycopy(arr, 0, arr1, 0, position - 1);
-		System.arraycopy(arr, position - 1, arr1, position, arr.length - position + 1);
-		arr = new String[arr1.length];
-		System.arraycopy(arr1, 0, arr, 0, arr1.length);
+		System.arraycopy(arr, position - 1, arr, position, length - position + 1);
+		arr[position - 1] = element;
 	}
 	
 	public void change(int position, String element){
@@ -41,23 +39,20 @@ public class MutableArrayList{
 
 	//删除1位元素，但前面用了个for循环，就是删除多位元素了
 	public void remove(int position){
-		arr1 = new String[arr.length - 1];
-		//将arr中position之前的元素写进arr1
-		System.arraycopy(arr, 0, arr1, 0, position - 1);
+		length--;
 		//将arr中position之后的元素写进arr1，此时刚好可以省去position位置的元素
-		System.arraycopy(arr, position, arr1, position - 1, arr.length - position);
-		arr = new String[arr1.length];//将arr数组初始化，增加长度
-		System.arraycopy(arr1, 0, arr, 0, arr1.length);//将arr1全部写进arr
+		//如：数组0 1 2 3，要删掉1，position = 2
+		System.arraycopy(arr, position, arr, position - 1, length - position + 1);
 	}
 
 	//删除1个元素，但前面用了个for循环，就是删除多个元素了
 	public void remove(String element){
-		int[] a = new int[arr.length];//用来装需要删掉的元素的位置，
-		int b = 0;                    //长度设为arr.length是为了先找到，后面用了c[]重新装
-		for(int i = 0; i < arr.length; i++){
+		int[] a = new int[length];//用来装需要删掉的元素的位置，
+		int b = 0;                    //长度设为length是为了先找到
+		for(int i = 0; i < length; i++){
 			if(element.equals(arr[i])){
-				a[b] = i + 1;
-				b++;                  //用b来记录有几个元素需要删掉
+				a[b] = i + 1;         //a[b]中的b表示有几个元素需要删掉
+				b++;                  //用i+1来记要删除元素的位置
 			}
 		}
 		if(b == 0){

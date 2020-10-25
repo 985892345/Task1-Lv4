@@ -26,9 +26,21 @@ public class Lv4 {
 			start();
 		}else{
 			list.add(s);
-			System.out.println("该数组内有：" + list.size() + "个元素" + "\n");
-			print(1);
-			judge(input());
+			System.out.println("该数组内有：" + list.size() + "个元素" + "\n" +
+			                   "======================================" + "\n" + 
+							   "======================================" + "\n" +
+			                   "本程序有以下功能：" + "\n" + 
+							   "1、增加新的元素" + "\n" + 
+							   "2、读取数组长短" + "\n" + 
+							   "3、读取某位元素" + "\n" + 
+							   "4、指定位加元素" + "\n" + 
+							   "5、修改某位元素" + "\n" +
+							   "6、删除多位元素" + "\n" + 
+							   "7、删除多个元素" + "\n" + 
+							   "0、退出本程序" + "\n" + 
+							   "请输入想要实现的功能：");
+			s = input();
+			judge(s);
 		}
 	}
 	
@@ -38,24 +50,27 @@ public class Lv4 {
 			finish(1);
 		}else if(s.equals(Integer.toString(1))){
 			//增加新的元素
-			System.out.println("请输入要添加的新元素" + "\n" + 
+			System.out.println("______________________________________" + "\n" +
+			                   "请输入要添加的新元素" + "\n" + 
 					           "（新元素将会添加到数组后面，支持添加多个元素）");
 			list.add(input());
-			print(2);
+			print();
 			finish(2);
 		}else if(s.equals(Integer.toString(2))){
 			//读取数组长短
-			System.out.println("该数组内有：" + list.size() + "个元素");
+			System.out.println("______________________________________" + "\n" +
+			                   "该数组内有：" + list.size() + "个元素");
 			finish(2);
 		}else if(s.equals(Integer.toString(3))){
 			//读取某位元素
-            System.out.println("请输入想要读取的元素的位数：");
+            System.out.println("______________________________________" + "\n" +
+			                   "请输入想要读取的元素的位数：");
 			String a = input();
 			if(a.length() <= 0){
-				System.out.println("输入了回车，请重新输入");
+				System.out.println("\n" + "输入了回车，请重新输入");
 				judge(s);
 			}else if(a.length() >= 2){
-				System.out.println("输入多位数据，请重新输入");
+				System.out.println("\n" + "输入多位数据，请重新输入");
 				judge(s);
 			}else if(Integer.parseInt(a) <= list.size() && Integer.parseInt(a) >= 1){
 				list.get(Integer.parseInt(a));
@@ -65,37 +80,40 @@ public class Lv4 {
 			finish(2);
 		}else if(s.equals(Integer.toString(4))){
 			//指定位加元素
-            System.out.println("请输入想要添加元素的位数和想添加的新元素：" + "\n" +
+            System.out.println("______________________________________" + "\n" +
+			                   "请输入想要添加元素的位数和想添加的新元素：" + "\n" +
 					           "（格式为：位数 新元素）");
 			String[] in = input().split(" ");
 			if(in.length != 2){//判断输入的数据是否为两个
-				System.out.println("格式错误，请重新输入！");
+				System.out.println("\n" + "格式错误，请重新输入！");
 				judge(s);
 			}else if(Integer.parseInt(in[0]) <= list.size() && Integer.parseInt(in[0]) >= 1){//判断位数是否超过，下面else为超过
 				list.add(Integer.parseInt(in[0]), in[1]);
-				print(2);
+				print();
 			}else{
 				OutOfBounds(Integer.parseInt(in[0]), s);
 			}
 			finish(2);
 		}else if(s.equals(Integer.toString(5))){
 			//修改某位元素
-            System.out.println("请输入想要修改元素的位数和想改的新元素：" + "\n" +
+            System.out.println("______________________________________" + "\n" +
+			                   "请输入想要修改元素的位数和想改的新元素：" + "\n" +
 					           "（格式为：位数 新元素）");
 			String[] in = input().split(" ");
 			if(in.length != 2){//判断输入的数据是否为两个
-				System.out.println("格式错误，请重新输入！");
+				System.out.println("\n" + "格式错误，请重新输入！");
 				judge(s);
 			}else if(Integer.parseInt(in[0]) <= list.size() && Integer.parseInt(in[0]) >= 1){//判断位数是否超过，下面else为超过
 				list.change(Integer.parseInt(in[0]), in[1]);
-				print(2);
+				print();
 			}else{
 				OutOfBounds(Integer.parseInt(in[0]), s);
 			}
 			finish(2);
 		}else if(s.equals(Integer.toString(6))){
 			//删除多位元素
-            System.out.println("请输入想要删除的元素的位数（多个位数用空格隔开）：");
+            System.out.println("______________________________________" + "\n" +
+			                   "请输入想要删除的元素的位数（多个位数用空格隔开）：");
 			int j = 0;  //这个j很关键，用来计算运行了几次正确的判断
 			int length = list.size();
 			String[] in = input().split(" ");
@@ -106,22 +124,25 @@ public class Lv4 {
 					j++;
 				} else {
 					System.out.println(Integer.parseInt(value) > length ?
-							("没有第" + value + "位元素，最多只有" + list.size() + "位元素") :
-							("输入" + value + "位元素错误，位数是从1开始"));
+							("\n" + "没有第" + value + "位元素，最多只有" + list.size() + "位元素") :
+							("\n" + "输入" + value + "位元素错误，位数是从1开始"));
 				}
 			}
-			print(2);
+			print();
 			finish(2);
 		}else if(s.equals(Integer.toString(7))){
 			//删除多个元素
-            System.out.println("请输入想要删除的元素（多个元素用空格隔开）：");
+            System.out.println("______________________________________" + "\n" +
+			                   "请输入想要删除的元素（多个元素用空格隔开）：");
 			String[] in = input().split(" ");
 			for(String value: in){
 				list.remove(value);
 			}
-			print(2);
+			print();
 			finish(2);
-		}else{
+		}else if(s.equals(Integer.toString(0))){
+			System.exit(0);
+		} else{
 			finish(1);
 		}
 	}
@@ -130,40 +151,20 @@ public class Lv4 {
 	public static void finish(int a){
 		System.out.println(a == 1 ? //三目运算
 						   ("\n" + 
-					       "请输入1~7的数字" + "\n" + 
-					       "若需重新选择请按回车" + "\n" + 
-					       "输入其他退出本程序"):
-						   ("\n" + 
-						   "若使用其他功能请按回车" + "\n" + 
-						   "输入其他退出本程序"));
-		String s = input();
-		if(s.length() <= 0){
-			print(1);
-			judge(input());
-		}else{
-			System.out.println("程序结束，欢迎使用！");
-			System.exit(0);
-		}
+					       "请重新输入0~7的数字"):
+						   ("======================================" + "\n" +
+						   "======================================" + "\n" +
+						   "若使用其他功能请继续输入，输入0退出本程序"));
+	    judge(input());
 	}
 
 	//打印
-	public static void print(int b){
-		if(b == 1){
-			System.out.println("本程序有以下功能：" + "\n" + 
-							   "1、增加新的元素" + "\n" + 
-							   "2、读取数组长短" + "\n" + 
-							   "3、读取某位元素" + "\n" + 
-							   "4、指定位加元素" + "\n" + 
-							   "5、修改某位元素" + "\n" +
-							   "6、删除多位元素" + "\n" + 
-							   "7、删除多个元素" + "\n" + 
-							   "请输入想要实现的功能：");
-		}else if(b == 2){//改了元素后的打印新数组
-			System.out.println("新数组为：");
-			for(Object a: list.arr){
-				System.out.print(a + " ");
-			}
+	public static void print(){
+		System.out.println("新数组为：");
+		for(int i = 0; i < list.size(); i++){
+			System.out.print(list.arr[i] + " ");
 		}
+		System.out.println();
 	}
 
 	//从键盘输入值
