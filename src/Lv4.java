@@ -17,7 +17,7 @@ public class Lv4 {
 		start();
 	}
 
-	//开始输入的数组
+	//开始输入数组
 	public static void start(){
 		System.out.println("请输入你想加入的数组（空格用来分割，支持文字）：");
 		String s = input();
@@ -141,6 +141,7 @@ public class Lv4 {
 			print();
 			finish(2);
 		}else if(s.equals(Integer.toString(0))){
+			//退出程序
 			System.exit(0);
 		} else{
 			finish(1);
@@ -158,7 +159,7 @@ public class Lv4 {
 	    judge(input());
 	}
 
-	//打印
+	//打印数组
 	public static void print(){
 		System.out.println("新数组为：");
 		for(int i = 0; i < list.size(); i++){
