@@ -1,18 +1,19 @@
 public class MutableArrayList{
-	public String[] arr = {};
+	public String[] arr = {};//此为原数组
 	private static int length = 0;//用length来计算数组长度
 
 	//增加新的元素
+	//思路为原数组多缓存位置，如果每次都重新修改原数组长度，会降低效率
 	public void add(String add){
 		String[] arr1 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
-		String[] arr2 = arr;//后面初始化arr数组会清空arr数组的元素，所以要复制一份，后面会把它写入arr前面
-		if(arr1.length + arr.length > length){
+		String[] arr2 = arr;//后面初始化原数组会清空原数组的元素，所以要复制一份，后面会把它写入原数组前面
+		//将新加进来的全部元素直接写到原数组后面
+		if(arr1.length + length > arr.length){//判断新加进来的数组是否会超过原数组总长度，超过则多缓存位置
 			arr = new String[length + 2 * arr1.length];//初始化数组，并缓存多的2倍新加进来数组的长度
-			System.arraycopy(arr2, 0, arr, 0, length);
-			length += arr1.length;
-		}
-		//将arr1的全部数组写进arr后面
-		System.arraycopy(arr1, 0, arr, length - arr1.length, arr1.length);
+			System.arraycopy(arr2, 0, arr, 0, length);//将之前的原数组元素写到前面
+		}//当新加进来的数组不超过原数组长度时
+		System.arraycopy(arr1, 0, arr, length, arr1.length);//将新加进来的全部元素写到原数组后面
+		length += arr1.length;//增加length
 	}
 
 	//读取数组长短
@@ -39,7 +40,7 @@ public class MutableArrayList{
 	//删除1位元素，但前面用了个for循环，就是删除多位元素了
 	public void remove(int position){
 		length--;//去一个元素减1长度
-		//将arr中position之后的元素写进arr，此时刚好可以覆盖position位置的元素
+		//将arr中position之后的元素写进原数组，此时刚好可以覆盖position位置的元素
 		//如：数组0 1 2 3，要删掉1，则position = 2
 		System.arraycopy(arr, position, arr, position - 1, length - position + 1);
 	}
