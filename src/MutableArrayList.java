@@ -30,6 +30,7 @@ public class MutableArrayList{
 	public void add(int position, String element){
 		System.arraycopy(arr, position - 1, arr, position, length - position + 1);
 		arr[position - 1] = element;
+		length++;
 	}
 
 	//改变某位数组
