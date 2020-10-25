@@ -6,9 +6,9 @@ public class MutableArrayList{
 	//思路为原数组多缓存位置，如果每次都重新修改原数组长度，会降低效率
 	public void add(String add){
 		String[] arr1 = add.split(" ");//将加进来的新元素以空格作为分割线组成新的数组
-		String[] arr2 = arr;//后面初始化原数组会清空原数组的元素，所以要复制一份，后面会把它写入原数组前面
 		//将新加进来的全部元素直接写到原数组后面
 		if(arr1.length + length > arr.length){//判断新加进来的数组是否会超过原数组总长度，超过则多缓存位置
+			String[] arr2 = arr;//后面初始化原数组会清空原数组的元素，所以要复制一份，后面会把它写入原数组前面
 			arr = new String[length + 2 * arr1.length];//初始化数组，并缓存多的2倍新加进来数组的长度
 			System.arraycopy(arr2, 0, arr, 0, length);//将之前的原数组元素写到前面
 		}//当新加进来的数组不超过原数组长度时
